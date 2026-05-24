@@ -7,9 +7,9 @@ three pillars of DevSecOps — built to reflect real enterprise implementations.
 
 | Pillar | Tool | Enterprise Equivalent | My Experience |
 |--------|------|-----------------------|---------------|
-| **SBOM** | `cyclonedx-bom` + `pip-audit` | JFrog Xray (CycloneDX) | Zebra — EO14028 compliance, 7,000 engineers |
+| **SBOM** | `cyclonedx-bom` + `pip-audit` | JFrog Xray (CycloneDX) | EO14028 compliance |
 | **SAST** | `bandit` | SonarQube | Zebra — CI/CD quality gates |
-| **DAST** | Custom scanner | Burp Suite Professional | eSentire — enterprise security platform |
+| **DAST** | Custom scanner | Burp Suite Professional |enterprise security platform |
 
 ## SBOM — Software Bill of Materials
 
