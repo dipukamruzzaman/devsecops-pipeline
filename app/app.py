@@ -1,11 +1,12 @@
 """
 Sample industrial device management API.
-Intentionally contains security issues for SBOM/SAST/DAST demo.
+Intentionally contains security issues for SAST/DAST demo.
 DO NOT use in production.
 """
 
 import sqlite3
 import hashlib
+import subprocess
 import os
 import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -71,6 +72,17 @@ class DeviceHandler(BaseHTTPRequestHandler):
             ).fetchall()
             conn.close()
             self.send_json(200, {"devices": rows})
+
+        elif parsed.path == "/api/ping":
+            # VULNERABILITY: command injection — shell=True with user input
+            host = qs.get("host", ["localhost"])[0]
+            result = subprocess.run(
+                f"ping -c 1 {host}",
+                shell=True,
+                capture_output=True,
+                text=True
+            )
+            self.send_json(200, {"output": result.stdout})
 
         elif parsed.path == "/api/version":
             self.send_json(200, {
