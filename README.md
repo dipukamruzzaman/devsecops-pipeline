@@ -55,10 +55,29 @@ STEP 3/3 — Policy Gate (HIGH+)
 RESULT: GATE FAILED — build promotion BLOCKED
 
 ## SAST — Static Application Security Testing
-*(Coming soon — Bandit / SonarQube equivalent)*
+
+Scans source code without running it. Finds SQL injection, command injection,
+weak cryptography, and hardcoded secrets. Mirrors SonarQube quality gates.
+
+    python sast\run_sast_pipeline.py --fail-on high
+
+Found 7 issues: 3 HIGH (command injection, weak MD5), 3 MEDIUM (SQL injection,
+binding all interfaces), 1 LOW. Gate blocked on HIGH+.
 
 ## DAST — Dynamic Application Security Testing
-*(Coming soon — Burp Suite equivalent)*
+
+Tests the running application with real attack payloads. Mirrors Burp Suite
+Professional active scanner.
+
+    # Terminal 1
+    python app\app.py
+
+    # Terminal 2
+    python dast\run_dast.py --fail-on high
+
+Found 11 issues: 2 CRITICAL (SQL injection confirmed, command injection confirmed),
+2 HIGH (default credentials accepted, MD5 token), 7 MEDIUM (missing security headers,
+debug mode). Gate blocked on HIGH+.
 
 ## Author
 
